@@ -1,4 +1,4 @@
-package sample;
+package com.fmx.coordinate;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
