@@ -1,5 +1,8 @@
 package com.fmx.coordinate;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
 public class ElementSquar {
     double x, y;
     double w, h = 10;
@@ -42,4 +45,12 @@ public class ElementSquar {
     public double getH() {
         return h;
     }
+
+    public Paint getColor() {
+        if (status == 1)
+            return Color.BLACK;
+        else
+            return Color.WHITE;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.fmx;
 
 import com.fmx.async.Advancer;
 import com.fmx.async.Updatable;
+import com.fmx.coordinate.ElementSquar;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,16 +17,20 @@ public class GameOfLifeGraph extends Application implements Updatable {
 
     private GameOfLifeLogic gamelogic = new GameOfLifeLogic();
 
+    private GraphicsContext canvasGraphieContext = null;
+
     @Override
     public void update(double moment) {
         System.out.println("update graph :" + moment);
         canvasGraphieContext.clearRect(0, 0, 1200, 800);
-
-        Random random = new Random();
-        canvasGraphieContext.strokeLine(random.nextDouble() * 1200, random.nextDouble() * 800, random.nextDouble() * 1200, random.nextDouble() * 800);
+        ElementSquar[][] grid = gamelogic.getElementGrid();
+        for (int i = 0; i < gamelogic.widthCount; i++) {
+            for (int j = 0; j < gamelogic.heighCount; j++) {
+                canvasGraphieContext.setFill(grid[i][j].getColor());
+                canvasGraphieContext.rect(grid[i][j].getX(), grid[i][j].getY(), 10, 10);
+            }
+        }
     }
-
-    private GraphicsContext canvasGraphieContext = null;
 
     @Override
     public void init() throws Exception {
@@ -45,10 +50,15 @@ public class GameOfLifeGraph extends Application implements Updatable {
         Group root = new Group();
         Canvas canvas = new Canvas(1200, 800);
         canvas.setOnMouseClicked(event -> {
-            double x = event.getX();
-            double y = event.getY();
-            double z = event.getZ();
-            System.out.println("x: " + x + " y: " + y + " z: " + z);
+//            double x = event.getX();
+//            double y = event.getY();
+//            gamelogic.activeCell((int) x, (int) y);
+            System.out.println("Random life");
+            Random random = new Random();
+            for (int i = 0; i < 50; i++) {
+                gamelogic.activeCell(random.nextInt(1200), random.nextInt(800));
+
+            }
         });
 
 //        canvas.setOnKeyPressed(event -> {
