@@ -7,15 +7,17 @@ public class GameOfLifeLogic implements Updatable {
     public static final int widthCount = 120;
     public static final int heighCount = 80;
 
-    int[][] curGrid = new int[widthCount][heighCount];
-    int[][] lstGrid = new int[widthCount][heighCount];
+    volatile int[][] curGrid = new int[widthCount][heighCount];
+    volatile int[][] lstGrid = new int[widthCount][heighCount];
 
-    ElementSquar[][] elementGrid = new ElementSquar[widthCount][heighCount];
+    volatile ElementSquar[][] elementGrid = new ElementSquar[widthCount][heighCount];
 
     public GameOfLifeLogic() {
         for (int i = 0; i < 120; i++) {
             for (int j = 0; j < 80; j++) {
                 elementGrid[i][j] = new ElementSquar(i, j);
+                curGrid[i][j]=0;
+                lstGrid[i][j]=0;
             }
         }
     }
@@ -28,16 +30,16 @@ public class GameOfLifeLogic implements Updatable {
         for (int i = 0; i < widthCount; i++) {
             for (int j = 0; j < heighCount; j++) {
                 if (judgeLife(i, j)) {
-                    elementGrid[i][j].setBlack();
-                } else {
                     elementGrid[i][j].setWhite();
+                } else {
+                    elementGrid[i][j].setBlack();
                 }
             }
         }
 
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

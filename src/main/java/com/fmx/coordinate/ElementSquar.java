@@ -9,7 +9,7 @@ public class ElementSquar {
 
     int idx, idy;
 
-    int status = 0;
+    volatile int status = 0;
 
     public ElementSquar(int idx, int idy) {
         this.idx = idx;
@@ -23,11 +23,11 @@ public class ElementSquar {
     }
 
     public void setBlack() {
-        this.status = 1;
+        this.status = 0;
     }
 
     public void setWhite() {
-        this.status = 0;
+        this.status = 1;
     }
 
     public double getX() {
@@ -48,9 +48,13 @@ public class ElementSquar {
 
     public Paint getColor() {
         if (status == 1)
-            return Color.BLACK;
-        else
             return Color.WHITE;
+        else
+            return Color.BLACK;
+    }
+
+    public int getStatus() {
+        return status;
     }
 
 }
