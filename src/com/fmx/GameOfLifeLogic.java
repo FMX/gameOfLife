@@ -7,6 +7,6 @@ public class GameOfLifeLogic implements Updatable {
 
     @Override
     public void update(double moment) {
-
+        System.out.println("Update Logic");
     }
 }

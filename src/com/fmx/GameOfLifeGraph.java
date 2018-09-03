@@ -15,12 +15,28 @@ import java.util.Random;
 public class GameOfLifeGraph extends Application implements Updatable {
     @Override
     public void update(double moment) {
-        System.out.println(" update method called! ");
+        System.out.println("update graph");
         Random random = new Random();
         canvasGraphieContext.strokeLine(random.nextDouble() * 1200, random.nextDouble() * 800, random.nextDouble() * 1200, random.nextDouble() * 800);
     }
 
     private GraphicsContext canvasGraphieContext = null;
+
+    @Override
+    public void init() throws Exception {
+        Advancer advancer = new Advancer(new GameOfLifeLogic());
+        new Thread(() -> {
+            while (true) {
+                advancer.advance(this);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        super.init();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,7 +50,6 @@ public class GameOfLifeGraph extends Application implements Updatable {
             double z = event.getZ();
             System.out.println("x: " + x + " y: " + y + " z: " + z);
         });
-
 
         canvasGraphieContext = canvas.getGraphicsContext2D();
 
@@ -55,17 +70,6 @@ public class GameOfLifeGraph extends Application implements Updatable {
 
     public static void main(String[] args) {
         launch(args);
-        Advancer advancer = new Advancer(new GameOfLifeLogic());
-        new Thread(() -> {
-            while (true) {
-                advancer.advance(new GameOfLifeGraph());
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
 }
