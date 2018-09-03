@@ -34,7 +34,6 @@ public class DrawAxis {
      * Creates an empty instance of DrawAxis
      */
     public DrawAxis() {
-        // TODO Auto-generated constructor stub
         //the parameters is undefined,so set default values;
         centerX = 40;
         centerY = 40;

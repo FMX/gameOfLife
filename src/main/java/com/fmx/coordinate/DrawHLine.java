@@ -10,15 +10,11 @@ public class DrawHLine extends Line {
     double endY;
 
     public DrawHLine() {
-        // TODO Auto-generated constructor stub
     }
 
     public DrawHLine(double centerX, double centerY, double lineLength) {
         super(centerX - lineLength / 2, centerY, centerX + lineLength / 2, centerY);
-        // TODO Auto-generated constructor stub
-
         getLinePara(centerX, centerY, lineLength);
-
         //可补充
         selfDefine();
     }

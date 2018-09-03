@@ -10,14 +10,11 @@ public class DrawVLine extends Line {
     double endY;
 
     public DrawVLine() {
-        // TODO Auto-generated constructor stub
     }
 
     public DrawVLine(double centerX,double centerY ,double lineLength) {
         super(centerX, centerY-lineLength/2, centerX, centerY+lineLength/2);
-        // TODO Auto-generated constructor stub
         getLinePara(centerX, centerY, lineLength);
-
         //可补充
         selfDefine();
     }

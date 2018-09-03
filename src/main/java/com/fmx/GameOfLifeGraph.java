@@ -13,10 +13,14 @@ import javafx.stage.Stage;
 import java.util.Random;
 
 public class GameOfLifeGraph extends Application implements Updatable {
+
+    private GameOfLifeLogic gamelogic = new GameOfLifeLogic();
+
     @Override
     public void update(double moment) {
         System.out.println("update graph :" + moment);
         canvasGraphieContext.clearRect(0, 0, 1200, 800);
+
         Random random = new Random();
         canvasGraphieContext.strokeLine(random.nextDouble() * 1200, random.nextDouble() * 800, random.nextDouble() * 1200, random.nextDouble() * 800);
     }
@@ -25,15 +29,10 @@ public class GameOfLifeGraph extends Application implements Updatable {
 
     @Override
     public void init() throws Exception {
-        Advancer advancer = new Advancer(new GameOfLifeLogic());
+        Advancer advancer = new Advancer(gamelogic);
         new Thread(() -> {
             while (true) {
                 advancer.advance(this);
-                try {
-                    Thread.sleep(16);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }).start();
         super.init();
@@ -51,6 +50,13 @@ public class GameOfLifeGraph extends Application implements Updatable {
             double z = event.getZ();
             System.out.println("x: " + x + " y: " + y + " z: " + z);
         });
+
+//        canvas.setOnKeyPressed(event -> {
+//            System.out.println(event.getCode().toString());
+//            if (event.getCode().equals(KeyCode.ESCAPE)) {
+//                Platform.exit();
+//            }
+//        });
 
         canvasGraphieContext = canvas.getGraphicsContext2D();
 
