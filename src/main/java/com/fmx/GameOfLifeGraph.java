@@ -15,7 +15,8 @@ import java.util.Random;
 public class GameOfLifeGraph extends Application implements Updatable {
     @Override
     public void update(double moment) {
-        System.out.println("update graph");
+        System.out.println("update graph :" + moment);
+        canvasGraphieContext.clearRect(0, 0, 1200, 800);
         Random random = new Random();
         canvasGraphieContext.strokeLine(random.nextDouble() * 1200, random.nextDouble() * 800, random.nextDouble() * 1200, random.nextDouble() * 800);
     }
@@ -29,7 +30,7 @@ public class GameOfLifeGraph extends Application implements Updatable {
             while (true) {
                 advancer.advance(this);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(16);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
