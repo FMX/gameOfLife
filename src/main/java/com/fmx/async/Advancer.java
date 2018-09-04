@@ -21,7 +21,7 @@ public class Advancer {
             Semaphore semaphore = new Semaphore(1);
             while (able) try {
                 long now = System.nanoTime();
-                double moment = (now - timer) * 0.000000001;
+                double moment = (now - timer) * 0.000001;
                 timer = now;
                 worker.update(moment);
                 semaphore.acquire();

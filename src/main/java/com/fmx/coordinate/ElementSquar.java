@@ -6,7 +6,8 @@ import javafx.scene.paint.Paint;
 
 public class ElementSquar {
     double x, y;
-    double w, h = Constant.squareSize;
+    double w = Constant.squareSize;
+    double h = Constant.squareSize;
 
     int idx, idy;
 
