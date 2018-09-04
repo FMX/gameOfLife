@@ -2,6 +2,7 @@ package com.fmx;
 
 import com.fmx.async.Advancer;
 import com.fmx.async.Updatable;
+import com.fmx.config.Constant;
 import com.fmx.coordinate.ElementSquar;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -22,14 +23,12 @@ public class GameOfLifeGraph extends Application implements Updatable {
     @Override
     public void update(double moment) {
         System.out.println("update graph :" + moment);
-//        canvasGraphieContext.clearRect(0, 0, 1200, 800);
         ElementSquar[][] grid = gamelogic.getElementGrid();
         for (int i = 0; i < GameOfLifeLogic.getWidthCount(); i++) {
             for (int j = 0; j < GameOfLifeLogic.getHeighCount(); j++) {
                 canvasGraphieContext.setFill(grid[i][j].getColor());
                 double x = grid[i][j].getX();
                 double y = grid[i][j].getY();
-//                System.out.printf(" (%f,%f,%d,%s) ", x, y,grid[i][j].getStatus(),grid[i][j].getColor().toString());
                 canvasGraphieContext.fillRect(x, y, 10, 10);
             }
         }
@@ -43,7 +42,7 @@ public class GameOfLifeGraph extends Application implements Updatable {
                 advancer.advance(this);
             }
         }).start();
-        super.init();
+//        super.init();
     }
 
     @Override
@@ -58,12 +57,12 @@ public class GameOfLifeGraph extends Application implements Updatable {
 //            gamelogic.activeCell((int) x, (int) y);
             System.out.println("Random life");
             Random random = new Random();
-            for (int i = 0; i < 50; i++) {
-                int x = random.nextInt(1200);
-                int y = random.nextInt(800);
-                System.out.printf("( (%d,%d) ", x, y);
+            for (int i = 0; i < 500; i++) {
+                int x = random.nextInt(Constant.fieldWidth);
+                int y = random.nextInt(Constant.fieldHeight);
                 gamelogic.activeCell(x, y);
             }
+
         });
 
         root.getChildren().add(canvas);
@@ -71,12 +70,8 @@ public class GameOfLifeGraph extends Application implements Updatable {
         primaryStage.show();
 
         canvasGraphieContext = canvas.getGraphicsContext2D();
-//        canvasGraphieContext.setGlobalBlendMode(BlendMode.DARKEN);
-//        drawGrid(canvasGraphieContext);
         canvasGraphieContext.setFill(Color.BLACK);
         canvasGraphieContext.fillRect(0, 0, 1200, 800);
-        canvas.getGraphicsContext2D().setFill(Color.BLUE);
-        canvas.getGraphicsContext2D().fillRect(0, 0, 1200, 800);
 
     }
 

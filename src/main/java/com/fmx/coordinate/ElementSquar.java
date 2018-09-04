@@ -1,11 +1,12 @@
 package com.fmx.coordinate;
 
+import com.fmx.config.Constant;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class ElementSquar {
     double x, y;
-    double w, h = 10;
+    double w, h = Constant.squareSize;
 
     int idx, idy;
 
