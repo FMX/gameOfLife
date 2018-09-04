@@ -53,9 +53,6 @@ public class GameOfLifeGraph extends Application implements Updatable {
         Group root = new Group();
         Canvas canvas = new Canvas(1200, 800);
         canvas.setOnMouseClicked(event -> {
-//            double x = event.getX();
-//            double y = event.getY();
-//            gamelogic.activeCell((int) x, (int) y);
             System.out.println("Random life");
             Random random = new Random();
             for (int i = 0; i < 2500; i++) {
@@ -63,8 +60,14 @@ public class GameOfLifeGraph extends Application implements Updatable {
                 int y = random.nextInt(Constant.fieldHeight);
                 gamelogic.activeCell(x, y);
             }
-
         });
+
+        canvas.setOnMousePressed(event -> {
+            double x = event.getX();
+            double y = event.getY();
+            gamelogic.activeCell((int) x, (int) y);
+        });
+
 
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
