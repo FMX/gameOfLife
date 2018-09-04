@@ -16,7 +16,7 @@ public class GameOfLifeLogic implements Updatable {
     volatile int[][] curGrid = new int[Constant.widthCount][Constant.heighCount];
     volatile int[][] lstGrid = new int[Constant.widthCount][Constant.heighCount];
 
-    private ExecutorService fixedExecutors = Executors.newFixedThreadPool(8);
+    private ExecutorService fixedExecutors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     public GameOfLifeLogic() {
         for (int i = 0; i < Constant.widthCount; i++) {
