@@ -1,23 +1,23 @@
 package com.fmx;
 
 import com.fmx.async.Updatable;
+import com.fmx.config.Constant;
 import com.fmx.coordinate.ElementSquar;
 
 public class GameOfLifeLogic implements Updatable {
-    public static final int widthCount = 120;
-    public static final int heighCount = 80;
 
-    volatile int[][] curGrid = new int[widthCount][heighCount];
-    volatile int[][] lstGrid = new int[widthCount][heighCount];
 
-    volatile ElementSquar[][] elementGrid = new ElementSquar[widthCount][heighCount];
+    volatile int[][] curGrid = new int[Constant.widthCount][Constant.heighCount];
+    volatile int[][] lstGrid = new int[Constant.widthCount][Constant.heighCount];
+
+    volatile ElementSquar[][] elementGrid = new ElementSquar[Constant.widthCount][Constant.heighCount];
 
     public GameOfLifeLogic() {
-        for (int i = 0; i < 120; i++) {
-            for (int j = 0; j < 80; j++) {
+        for (int i = 0; i < Constant.widthCount; i++) {
+            for (int j = 0; j < Constant.heighCount; j++) {
                 elementGrid[i][j] = new ElementSquar(i, j);
-                curGrid[i][j]=0;
-                lstGrid[i][j]=0;
+                curGrid[i][j] = 0;
+                lstGrid[i][j] = 0;
             }
         }
     }
@@ -26,9 +26,9 @@ public class GameOfLifeLogic implements Updatable {
     public void update(double moment) {
         System.out.println("Update Logic :" + moment);
         lstGrid = curGrid;
-        curGrid = new int[widthCount][heighCount];
-        for (int i = 0; i < widthCount; i++) {
-            for (int j = 0; j < heighCount; j++) {
+        curGrid = new int[Constant.widthCount][Constant.heighCount];
+        for (int i = 0; i < Constant.widthCount; i++) {
+            for (int j = 0; j < Constant.heighCount; j++) {
                 if (judgeLife(i, j)) {
                     elementGrid[i][j].setWhite();
                 } else {
@@ -36,6 +36,9 @@ public class GameOfLifeLogic implements Updatable {
                 }
             }
         }
+
+//        IntStream.range(0, elementGrid.length).map(element -> (Arrays.stream(elementGrid[element]).forEach(x -> (elementGrid[element][
+//                x].setWhite()))).collect(Collectors.toList());
 
 
 //        try {
@@ -68,14 +71,14 @@ public class GameOfLifeLogic implements Updatable {
     }
 
     public boolean validateWidth(int index) {
-        if (index >= 0 && index < widthCount) {
+        if (index >= 0 && index < Constant.widthCount) {
             return true;
         }
         return false;
     }
 
     public boolean validateHeight(int index) {
-        if (index >= 0 && index < heighCount) {
+        if (index >= 0 && index < Constant.heighCount) {
             return true;
         }
         return false;
@@ -86,11 +89,11 @@ public class GameOfLifeLogic implements Updatable {
     }
 
     public static int getWidthCount() {
-        return widthCount;
+        return Constant.widthCount;
     }
 
     public static int getHeighCount() {
-        return heighCount;
+        return Constant.heighCount;
     }
 
     public void activeCell(int x, int y) {

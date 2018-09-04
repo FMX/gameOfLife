@@ -8,7 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -25,8 +24,8 @@ public class GameOfLifeGraph extends Application implements Updatable {
         System.out.println("update graph :" + moment);
 //        canvasGraphieContext.clearRect(0, 0, 1200, 800);
         ElementSquar[][] grid = gamelogic.getElementGrid();
-        for (int i = 0; i < gamelogic.widthCount; i++) {
-            for (int j = 0; j < gamelogic.heighCount; j++) {
+        for (int i = 0; i < GameOfLifeLogic.getWidthCount(); i++) {
+            for (int j = 0; j < GameOfLifeLogic.getHeighCount(); j++) {
                 canvasGraphieContext.setFill(grid[i][j].getColor());
                 double x = grid[i][j].getX();
                 double y = grid[i][j].getY();
@@ -60,10 +59,10 @@ public class GameOfLifeGraph extends Application implements Updatable {
             System.out.println("Random life");
             Random random = new Random();
             for (int i = 0; i < 50; i++) {
-                int x=random.nextInt(1200);
-                int y=random.nextInt(800);
-                System.out.printf("( (%d,%d) ",x,y);
-                gamelogic.activeCell(x,y);
+                int x = random.nextInt(1200);
+                int y = random.nextInt(800);
+                System.out.printf("( (%d,%d) ", x, y);
+                gamelogic.activeCell(x, y);
             }
         });
 
