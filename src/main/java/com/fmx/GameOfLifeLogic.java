@@ -36,16 +36,6 @@ public class GameOfLifeLogic implements Updatable {
                 }
             }
         }
-
-//        IntStream.range(0, elementGrid.length).map(element -> (Arrays.stream(elementGrid[element]).forEach(x -> (elementGrid[element][
-//                x].setWhite()))).collect(Collectors.toList());
-
-
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public boolean judgeLife(int idx, int idy) {
@@ -60,7 +50,7 @@ public class GameOfLifeLogic implements Updatable {
             }
         }
 
-        if (activeCells == 2 || activeCells == 3) {
+        if (activeCells >= Constant.liveLowerThreshold || activeCells <= Constant.liveUpperThreshold) {
             curGrid[idx][idy] = 1; //alive
             return true;
         } else {
