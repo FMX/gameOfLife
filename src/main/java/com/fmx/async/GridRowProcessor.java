@@ -3,9 +3,9 @@ package com.fmx.async;
 import com.fmx.config.Constant;
 
 public class GridRowProcessor implements Runnable {
-    private int[][] lstGrid;
-    private int[][] curGrid;
-    private int rowIndex;
+    private final int[][] lstGrid;
+    private final int[][] curGrid;
+    private final int rowIndex;
 
     public GridRowProcessor(int[][] lst, int[][] cur, int row) {
         lstGrid = lst;
@@ -21,7 +21,7 @@ public class GridRowProcessor implements Runnable {
 
     }
 
-    public void judgeLife(int idx, int idy) {
+    private void judgeLife(int idx, int idy) {
         int activeCells = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -41,18 +41,12 @@ public class GridRowProcessor implements Runnable {
 
     }
 
-    public boolean validateWidth(int index) {
-        if (index >= 0 && index < Constant.widthCount) {
-            return true;
-        }
-        return false;
+    private boolean validateWidth(int index) {
+        return index >= 0 && index < Constant.widthCount;
     }
 
-    public boolean validateHeight(int index) {
-        if (index >= 0 && index < Constant.heighCount) {
-            return true;
-        }
-        return false;
+    private boolean validateHeight(int index) {
+        return index >= 0 && index < Constant.heighCount;
     }
 
 

@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class GameOfLifeGraph extends Application implements Updatable {
 
-    private GameOfLifeLogic gamelogic = new GameOfLifeLogic();
+    private final GameOfLifeLogic gamelogic = new GameOfLifeLogic();
 
     private GraphicsContext canvasGraphieContext = null;
 
@@ -40,7 +40,7 @@ public class GameOfLifeGraph extends Application implements Updatable {
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         Advancer advancer = new Advancer(gamelogic);
         new Thread(() -> {
             while (true) {
@@ -50,7 +50,7 @@ public class GameOfLifeGraph extends Application implements Updatable {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setResizable(false);
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();

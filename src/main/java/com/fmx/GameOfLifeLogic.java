@@ -13,10 +13,10 @@ import java.util.concurrent.Future;
 
 public class GameOfLifeLogic implements Updatable {
 
-    volatile int[][] curGrid = new int[Constant.widthCount][Constant.heighCount];
-    volatile int[][] lstGrid = new int[Constant.widthCount][Constant.heighCount];
+    private volatile int[][] curGrid = new int[Constant.widthCount][Constant.heighCount];
+    private volatile int[][] lstGrid = new int[Constant.widthCount][Constant.heighCount];
 
-    private ExecutorService fixedExecutors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    private final ExecutorService fixedExecutors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     public GameOfLifeLogic() {
         for (int i = 0; i < Constant.widthCount; i++) {
@@ -47,9 +47,7 @@ public class GameOfLifeLogic implements Updatable {
         for (Future task : tasks) {
             try {
                 task.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }

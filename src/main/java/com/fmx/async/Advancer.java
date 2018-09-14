@@ -6,7 +6,7 @@ import java.util.concurrent.Semaphore;
 
 public class Advancer {
     private boolean able;
-    private Updatable worker;
+    private final Updatable worker;
 
     public Advancer(Updatable worker) {
         this.worker = worker;
